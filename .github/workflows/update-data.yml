@@ -10,8 +10,10 @@ jobs:
           ruby-version: '2.6'
 
       - name: Install and update data
-        run: make install
-        run: make update-data
+        run: |
+          make install
+          make update-data
+    
 
       - name: Commit changes
         run: |
