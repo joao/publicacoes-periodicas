@@ -5,6 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.6'
@@ -13,9 +16,7 @@ jobs:
         run: |
           make install
           make update-data
-    
 
-      - name: Commit changes
-        run: |
-          git commit publicacoes_periodicas.csv publicacoes_periodicas.json -m 'New publications data' || echo "No changes to commit"
-          git push https://${{github.actor}}:${{secrets.GH_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: New publications data
