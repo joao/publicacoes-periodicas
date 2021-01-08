@@ -1,8 +1,6 @@
 # Publicações Periódicas
 Publicações periódicas em Portugal - ERC
 
-Última actualização a 05 Janeiro, 2021
-
 Campos:
 - número de registo
 - título
