@@ -1,0 +1,8 @@
+name: update-data
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: make install
+      - run: make update-data
