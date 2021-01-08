@@ -10,10 +10,10 @@ jobs:
           ruby-version: '2.6'
 
       - name: Install and update data
-        - run: make install
-        - run: make update-data
+        run: make install
+        run: make update-data
 
       - name: Commit changes
-        - run: |
+        run: |
           git commit publicacoes_periodicas.csv publicacoes_periodicas.json -m 'New publications data' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.GH_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
