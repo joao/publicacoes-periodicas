@@ -7,6 +7,6 @@ update-data:
 	ruby scripts/csv_to_json.rb "publicacoes_periodicas.csv"
 
 push:
-	git push origin master
+	git push origin main
 
 	
