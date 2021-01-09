@@ -1,6 +1,8 @@
 # Publicações Periódicas
 Publicações periódicas em Portugal - ERC
 
+Fonte: [https://www.erc.pt/pt/listagem-registos-na-erc](https://www.erc.pt/pt/listagem-registos-na-erc)
+
 Campos:
 - número de registo
 - título
