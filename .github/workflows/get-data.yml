@@ -1,4 +1,4 @@
-name: update-data
+name: get-data
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Install and update data
         run: |
-          make Install
+          make install
           make run
 
       - uses: stefanzweifel/git-auto-commit-action@v4
