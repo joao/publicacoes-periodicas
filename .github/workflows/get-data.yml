@@ -14,9 +14,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
+      - uses: ruby/setup-ruby@v1
 
       - name: Install and update data
         run: |
