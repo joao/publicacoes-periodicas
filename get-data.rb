@@ -47,11 +47,11 @@ def clean_csv
   system(clean)
   
   puts "Updating README..."
-  lines_counter = Rubysh('wc', '-l', @csv_file, Rubysh.stdout > :stdout)
-  lines = lines_counter.run
+  lines_counter = Rubysh('wc', '-l', @csv_file, Rubysh.stdout > :stdout) # build line counter
+  lines = lines_counter.run # run line counter
   number_of_lines = lines.read(:stdout).split(' ')[0].strip().to_i - 1 # account for headers row
-  number_of_lines_with_thousand_separator = number_of_lines.to_s.reverse.scan(/.{1,3}/).join('.').reverse
-  text_to_replace = "#{number_of_lines_with_thousand_separator} registos de publicações periódicas  "
+  number_of_lines_with_thousand_separator = number_of_lines.to_s.reverse.scan(/.{1,3}/).join('.').reverse # insert a thousands separator
+  text_to_replace = "#{number_of_lines_with_thousand_separator} registos de publicações periódicas  " # text to update on README
   system("sed -i -e '/registos de publicações periódicas/s/^.*$/#{text_to_replace}/' README.md && rm -rf README.md-e")
 
 end
