@@ -9,6 +9,7 @@ Actualizado semanalmente.
 
 | Informação de cada publicação periódica |
 | :--- |
+| modificado em |
 | número de registo |
 | data de inscrição |
 | título |
