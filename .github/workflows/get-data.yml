@@ -3,7 +3,7 @@ name: update-data
 on:
   workflow_dispatch:
   schedule:
-  - cron: '35 6 * * 6'
+  - cron: '5 4 */5 * *'
 
 
 jobs:
@@ -20,8 +20,8 @@ jobs:
 
       - name: Install and update data
         run: |
-          make install
-          make update-data
+          make Install
+          make run
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
