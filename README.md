@@ -5,8 +5,6 @@ Publicações periódicas em Portugal da [ERC - Entidade Reguladora para a Comun
 [https://www.erc.pt/pt/registo-de-ocs/listagem-de-registos-](https://www.erc.pt/pt/registo-de-ocs/listagem-de-registos-)  
 
 8.634 registos de publicações periódicas  
-Actualizado semanalmente  
-
 
 | Informação de cada publicação periódica |
 | :--- |
