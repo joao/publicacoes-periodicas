@@ -3,6 +3,7 @@
 require 'open-uri'
 require 'nokogiri'
 require 'csv'
+require 'rubysh'
 
 
 @erc_page = "https://www.erc.pt/pt/registo-de-ocs/listagem-de-registos-"
@@ -36,14 +37,22 @@ end
 
 def clean_csv
   
-  puts "Remove first line..."
-  system("tail -n +2 #{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file}")
-
-  puts "Remove first two columns..."
-  system("cut -d, -f3- #{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file}")
+  output_and_rename = "#{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file}"
   
-  puts "Rename the first column header..."
-  system("awk -F, 'NR==1{$1=\"MODIFICADO EM\";} {print}' OFS=, #{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file} ")
+  clean = "tail -n +2 #{output_and_rename}\n" + # remove first line
+          "cut -d, -f3- #{output_and_rename}\n" + # remove first two columns
+          "awk -F, 'NR==1{$1=\"MODIFICADO EM\";} {print}' OFS=, #{output_and_rename}" # remove the first column header 
+  
+  puts "Cleaning CSV..."
+  system(clean)
+  
+  puts "Updating README..."
+  lines_counter = Rubysh('wc', '-l', @csv_file, Rubysh.stdout > :stdout)
+  lines = lines_counter.run
+  number_of_lines = lines.read(:stdout).split(' ')[0].strip().to_i - 1 # account for headers row
+  number_of_lines_with_thousand_separator = number_of_lines.to_s.reverse.scan(/.{1,3}/).join('.').reverse
+  text_to_replace = "#{number_of_lines_with_thousand_separator} registos de publicações periódicas  "
+  system("sed -i -e '/registos de publicações periódicas/s/^.*$/#{text_to_replace}/' README.md && rm -rf README.md-e")
 
 end
 
