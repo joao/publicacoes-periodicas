@@ -34,9 +34,36 @@ def download_data
 end
 
 
+def update_readme
+
+  puts "Updating README..."
+  # count lines
+  lines_counter = Rubysh('wc', '-l', @csv_file, Rubysh.stdout > :stdout) # build line counter
+  lines = lines_counter.run # run line counter
+  number_of_lines = lines.read(:stdout).split(' ')[0].strip().to_i - 1 # account for headers row
+  
+
+  # insert a thousands separator on the lines number
+  number_of_lines_with_thousand_separator = number_of_lines.to_s.reverse.scan(/.{1,3}/).join('.').reverse
+  # text to update
+  text_to_replace_number_records = "#{number_of_lines_with_thousand_separator} registos de publicações periódicas  "
+  # run command
+  system("sed -i -e '/registos de publicações periódicas/s/^.*$/#{text_to_replace_number_records}/' README.md && rm -rf README.md-e")
+
+  # get last update date
+  first_line = File.open(@csv_file) {|file| first_line = file.readline}
+  date = first_line.gsub(',','').encode("US-ASCII", invalid: :replace, undef: :replace).split(' ').last
+  # text to update date
+  date_character_escaped = date.gsub('/','\/') # escape / for use with bash
+  text_to_replace_last_update = "Última actualização a #{date_character_escaped}  "
+  # run command
+  system("sed -i -e '/Última actualização a/s/^.*$/#{text_to_replace_last_update}/' README.md && rm -rf README.md-e")
+
+
+end
+
 
 def clean_csv
-  
   output_and_rename = "#{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file}"
   
   clean = "tail -n +2 #{output_and_rename}\n" + # remove first line
@@ -45,16 +72,12 @@ def clean_csv
   
   puts "Cleaning CSV..."
   system(clean)
-  
-  puts "Updating README..."
-  lines_counter = Rubysh('wc', '-l', @csv_file, Rubysh.stdout > :stdout) # build line counter
-  lines = lines_counter.run # run line counter
-  number_of_lines = lines.read(:stdout).split(' ')[0].strip().to_i - 1 # account for headers row
-  number_of_lines_with_thousand_separator = number_of_lines.to_s.reverse.scan(/.{1,3}/).join('.').reverse # insert a thousands separator
-  text_to_replace = "#{number_of_lines_with_thousand_separator} registos de publicações periódicas  " # text to update on README
-  system("sed -i -e '/registos de publicações periódicas/s/^.*$/#{text_to_replace}/' README.md && rm -rf README.md-e")
 
 end
 
+# Run
 download_data()
+update_readme()
 clean_csv()
+
+
