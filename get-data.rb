@@ -12,6 +12,7 @@ require 'rubysh'
 
 
 def download_data
+  
   puts "Downloading data..."
 
   html = URI.open(@erc_page)
@@ -31,6 +32,7 @@ def download_data
 
   # Download
   system("wget -O #{@csv_file} #{download_link}")
+
 end
 
 
@@ -59,21 +61,23 @@ def update_readme
   # run command
   system("sed -i -e '/Última actualização a/s/^.*$/#{text_to_replace_last_update}/' README.md && rm -rf README.md-e")
 
-
 end
 
 
 def clean_csv
-  output_and_rename = "#{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file}"
-  
-  clean = "tail -n +2 #{output_and_rename}\n" + # remove first line
-          "cut -d, -f3- #{output_and_rename}\n" + # remove first two columns
-          "awk -F, 'NR==1{$1=\"MODIFICADO EM\";} {print}' OFS=, #{output_and_rename}" # remove the first column header 
   
   puts "Cleaning CSV..."
+
+  output_and_rename_files = "#{@csv_file} > #{@temp_csv_file} && mv #{@temp_csv_file} #{@csv_file}"
+  
+  clean = "tail -n +2 #{output_and_rename_files}\n" + # remove first line
+          "cut -d, -f3- #{output_and_rename_files}\n" + # remove first two columns
+          "awk -F, 'NR==1{$1=\"MODIFICADO EM\";} {print}' OFS=, #{output_and_rename_files}" # remove the first column header 
+  
   system(clean)
 
 end
+
 
 # Run
 download_data()
