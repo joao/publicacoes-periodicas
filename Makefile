@@ -1,5 +1,5 @@
 install:
-	gem install csv nokogiri rubysh
+	gem install nokogiri rubysh
 
 run:
 	ruby get-data.rb

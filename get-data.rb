@@ -2,7 +2,6 @@
 
 require 'open-uri'
 require 'nokogiri'
-require 'csv'
 require 'rubysh'
 
 
