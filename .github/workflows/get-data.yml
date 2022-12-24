@@ -3,7 +3,7 @@ name: get-data
 on:
   workflow_dispatch:
   schedule:
-  - cron: '5 4 */5 * *'
+  - cron: '5 4 */7 * *'
 
 
 jobs:
