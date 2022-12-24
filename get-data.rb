@@ -50,7 +50,7 @@ def clean_csv
   
   clean = "tail -n +2 #{output_and_rename_files}\n" + # remove first line
           "cut -d, -f3- #{output_and_rename_files}\n" + # remove first two columns
-          "awk -F, 'NR==1{$1=\"MODIFICADO EM\";} {print}' OFS=, #{output_and_rename_files}" # remove the first column header 
+          "awk -F, 'NR==1{$1=\"MODIFICADO EM\";} {print}' OFS=, #{output_and_rename_files}" # rename the first column header 
   
   system(clean)
 
