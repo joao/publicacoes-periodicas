@@ -1,10 +1,10 @@
 # Publicações Periódicas
-Publicações periódicas em Portugal da [ERC - Entidade Reguladora para a Comunicação Social](https://www.erc.pt/pt/) 
+Publicações periódicas em Portugal registadas na [ERC - Entidade Reguladora para a Comunicação Social](https://www.erc.pt/pt/) 
 
 Fonte: [Listagem de registos da ERC](https://www.erc.pt/pt/registo-de-ocs/listagem-de-registos-)  
 
-8.634 registos de publicações periódicas, 6.933 ativas  
-Última actualização a 02/12/2022  
+8.634 registos de publicações periódicas, 6.933 ativas.  
+Última actualização a 02/12/2022.  
 
 | Informação de cada publicação periódica |
 | :--- |

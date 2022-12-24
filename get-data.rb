@@ -76,14 +76,14 @@ def readme_update
   number_of_records_with_thousand_separator = number_of_records.to_s.reverse.scan(/.{1,3}/).join('.').reverse
   number_of_active_records = number_of_active_records.to_s.reverse.scan(/.{1,3}/).join('.').reverse
   # text to update
-  text_to_replace_number_records = "#{number_of_records_with_thousand_separator} registos de publicações periódicas, #{number_of_active_records} ativas  "
+  text_to_replace_number_records = "#{number_of_records_with_thousand_separator} registos de publicações periódicas, #{number_of_active_records} ativas.  "
   # run command
   system("sed -i -e '/registos de publicações periódicas/s/^.*$/#{text_to_replace_number_records}/' README.md && rm -rf README.md-e")
 
 
   # text to update date
   date_character_escaped = @last_update.gsub('/','\/') # escape / for use with bash
-  text_to_replace_last_update = "Última actualização a #{date_character_escaped}  "
+  text_to_replace_last_update = "Última actualização a #{date_character_escaped}.  "
   # run command
   system("sed -i -e '/Última actualização a/s/^.*$/#{text_to_replace_last_update}/' README.md && rm -rf README.md-e")
 
