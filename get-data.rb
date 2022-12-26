@@ -36,6 +36,7 @@ def download_data
 end
 
 
+
 def clean_csv
   
   puts "Cleaning CSV..."
@@ -57,6 +58,12 @@ def clean_csv
 end
 
 
+def thousands_delimiter(records_count)
+  number = records_count.to_s.reverse.scan(/.{1,3}/).join('.').reverse
+  return number 
+end
+
+
 def readme_update
 
   puts "Updating README..."
@@ -73,8 +80,8 @@ def readme_update
 
   
   # insert a thousands separator on the lines number
-  number_of_records_with_thousand_separator = number_of_records.to_s.reverse.scan(/.{1,3}/).join('.').reverse
-  number_of_active_records = number_of_active_records.to_s.reverse.scan(/.{1,3}/).join('.').reverse
+  number_of_records_with_thousand_separator = thousands_delimiter(number_of_records)
+  number_of_active_records = thousands_delimiter(number_of_active_records)
   # text to update
   text_to_replace_number_records = "#{number_of_records_with_thousand_separator} registos de publicações periódicas, #{number_of_active_records} ativas.  "
   # run command
